@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://cyxbe3a046l0g"]
+
+[ext_resource type="Script" path="res://treasure.gd" id="1_w3q48"]
+[ext_resource type="PackedScene" uid="uid://dlk4kl6bn7hcj" path="res://Chest/Treasure chest.glb" id="1_whxbe"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_40qlc"]
+
+[node name="Treasure" type="Area3D"]
+script = ExtResource("1_w3q48")
+main_scene = NodePath(".")
+
+[node name="Treasure chest" parent="." instance=ExtResource("1_whxbe")]
+transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 0, 0, 0)
+shape = SubResource("BoxShape3D_40qlc")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

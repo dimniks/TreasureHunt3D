@@ -1,0 +1,195 @@
+[gd_scene load_steps=14 format=3 uid="uid://blekksh0stxt2"]
+
+[ext_resource type="Script" path="res://main_scene.gd" id="1_agdd7"]
+[ext_resource type="Texture2D" uid="uid://dh20ogi1si7e4" path="res://brown_mud_leaves_01_diff_4k.jpg" id="1_asu4r"]
+[ext_resource type="Script" path="res://player.gd" id="2_tmy2k"]
+[ext_resource type="PackedScene" uid="uid://dg1xbmdq6eypi" path="res://Male Haakon 1.glb" id="3_gy546"]
+[ext_resource type="PackedScene" uid="uid://bvy2aa0543bsw" path="res://Tree/Apple Tree.glb" id="4_pheev"]
+[ext_resource type="PackedScene" uid="uid://dmr68mf6k27jq" path="res://Lamp/Street Light.glb" id="4_yrgte"]
+[ext_resource type="PackedScene" uid="uid://cfl1h3fbkn6h3" path="res://Bench/Outdoor Bench 01.glb" id="6_43x01"]
+[ext_resource type="Script" path="res://treasure_spawner.gd" id="7_1au7l"]
+[ext_resource type="PackedScene" uid="uid://cyxbe3a046l0g" path="res://treasure.tscn" id="9_slhrp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_vvvlp"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gcvlm"]
+albedo_texture = ExtResource("1_asu4r")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m20qd"]
+size = Vector3(20, 1, 20)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ferc6"]
+radius = 0.4
+height = 1.8
+
+[node name="MainScene" type="Node3D"]
+script = ExtResource("1_agdd7")
+
+[node name="Ground" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_vvvlp")
+surface_material_override/0 = SubResource("StandardMaterial3D_gcvlm")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("BoxShape3D_m20qd")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("2_tmy2k")
+
+[node name="CharacterModel" type="MeshInstance3D" parent="Player"]
+
+[node name="Male Haakon 1" parent="Player" instance=ExtResource("3_gy546")]
+transform = Transform3D(-0.986159, 0, 0.165805, 0, 1, 0, -0.165805, 0, -0.986159, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_ferc6")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.984808, -0.173648, 0, 0.173648, 0.984808, 0, 1.5, -2)
+
+[node name="ParkEnvironment" type="Node3D" parent="."]
+
+[node name="Lamps" type="Node3D" parent="ParkEnvironment"]
+
+[node name="Street Light" parent="ParkEnvironment/Lamps" instance=ExtResource("4_yrgte")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 2, 1, 8)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ParkEnvironment/Lamps/Street Light"]
+
+[node name="Street Light2" parent="ParkEnvironment/Lamps" instance=ExtResource("4_yrgte")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -3, 1, -4)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ParkEnvironment/Lamps/Street Light2"]
+
+[node name="Street Light3" parent="ParkEnvironment/Lamps" instance=ExtResource("4_yrgte")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 9, 1, 2)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ParkEnvironment/Lamps/Street Light3"]
+
+[node name="Street Light4" parent="ParkEnvironment/Lamps" instance=ExtResource("4_yrgte")]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, -8, 1, 6)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="ParkEnvironment/Lamps/Street Light4"]
+
+[node name="Trees" type="Node3D" parent="ParkEnvironment"]
+
+[node name="Apple Tree 1" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 3, 1, 5)
+
+[node name="Apple Tree 2" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5, 1, -3)
+
+[node name="Apple Tree 3" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 7, 1, -7)
+
+[node name="Apple Tree 4" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4, 1, -5)
+
+[node name="Apple Tree 5" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6, 1, 9)
+
+[node name="Apple Tree 6" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 6, 1, 8)
+
+[node name="Apple Tree 7" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 7, 1, 0)
+
+[node name="Apple Tree 8" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -6, 1, 2)
+
+[node name="Apple Tree 9" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -4, 1, 5)
+
+[node name="Apple Tree 10" parent="ParkEnvironment/Trees" instance=ExtResource("4_pheev")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 1, -4)
+
+[node name="Benches" type="Node3D" parent="ParkEnvironment"]
+
+[node name="Outdoor Bench 01" parent="ParkEnvironment/Benches" instance=ExtResource("6_43x01")]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, 0, 1, 2)
+
+[node name="Outdoor Bench 02" parent="ParkEnvironment/Benches" instance=ExtResource("6_43x01")]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, 6, 1, -3)
+
+[node name="Outdoor Bench 03" parent="ParkEnvironment/Benches" instance=ExtResource("6_43x01")]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, -4, 1, 7)
+
+[node name="Outdoor Bench 04" parent="ParkEnvironment/Benches" instance=ExtResource("6_43x01")]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, 8, 1, -6)
+
+[node name="Outdoor Bench 05" parent="ParkEnvironment/Benches" instance=ExtResource("6_43x01")]
+transform = Transform3D(0.007, 0, 0, 0, 0.007, 0, 0, 0, 0.007, -6, 1, 0)
+
+[node name="TreasureSpawner" type="Node3D" parent="."]
+script = ExtResource("7_1au7l")
+treasure_scene = ExtResource("9_slhrp")
+
+[node name="Treasures" type="Node3D" parent="."]
+
+[node name="Treasure" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -9.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure2" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, 9.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure3" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, 8.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure4" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, 7.2)
+main_scene = NodePath("../..")
+
+[node name="Treasure5" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 1, -6.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure6" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -1)
+main_scene = NodePath("../..")
+
+[node name="Treasure7" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 1, -4.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure8" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 1, 1.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure9" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1, 5.5)
+main_scene = NodePath("../..")
+
+[node name="Treasure10" parent="Treasures" instance=ExtResource("9_slhrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -4.5)
+main_scene = NodePath("../..")
+
+[node name="GameTimer" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="TimeLabel" type="Label" parent="UI"]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Time: 60"
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -119.0
+offset_bottom = 23.0
+grow_horizontal = 0
+text = "Treasures: 0/10"
+
+[node name="GameOverLabel" type="Label" parent="UI"]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+
+[connection signal="timeout" from="GameTimer" to="." method="_on_game_timer_timeout"]
